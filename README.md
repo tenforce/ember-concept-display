@@ -1,26 +1,29 @@
-# Ember-concept-display
+Ember concept display
+======
 
-This README outlines the details of collaborating on this Ember addon.
+Several components to easily declare how to display a concept.
 
-## Installation
+Usage
+---
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+Nest the block components to declare the view of a concept. The components are described below. The list below shows a suggested nesting.
 
-## Running
+All blocks can also be filled in with plain HTML or custom components.
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+* `concept-display object`  
+    Wrapper for the view for a concept. Observes which concept `object` is selected and reloads the view on change.
 
-## Running Tests
+	* `concept-title-bar`  
+	The title bar. Fill with title bar widgets, and the title in a `h1` header.
 
-* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
+	* `concept-sections`  
+	Wrapper for the body sections.
 
-## Building
+		* `concept-section title collapsed`  
+		A collapsible section with a title.
 
-* `ember build`
+			* `concept-subsection title`  
+			A subsection with a title.
 
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+				* `concept-textarea object reference`  
+				An editable text area for `object.[reference]` with save buttons. Not editable iff `object.disableEditing`. Registers to `saveAllButton` service.
