@@ -6,7 +6,9 @@ Several components to easily declare how to display a concept.
 Usage
 ---
 
-Nest the block components to declare the view of a concept. The components are described below. The list below shows a suggested nesting. Of course, all blocks can also be filled in with plain HTML or custom components.
+Nest the block components to declare the view of a concept. The components are described below. The list below shows a suggested nesting. 
+
+All blocks can also be filled in with plain HTML or custom components.
 
 * `concept-display object`
 	Wrapper for the view for a concept. Observes which concept `object` is selected and reloads the view on change.
