@@ -1,0 +1,10 @@
+<div class="value-display">
+  <div class="section__title">
+    <h2><span onclick={{action "toggleCollapsed"}}>{{title}}</span></h2>
+  </div>
+  {{#if (not collapsed)}}
+    <div class="section__body">
+      {{yield}}
+    </div>
+  {{/if}}
+</div>
