@@ -35,11 +35,11 @@ ConceptTextareaComponent = Ember.Component.extend ResizeTextareaMixin,
   saveField: ->
     boundValue = @get('boundValue')
     @get('object').set(@get('reference'), boundValue)
-    @get('object').save()
 
   actions:
     saveField: ->
       @saveField()
+      @get('object').save()
 
     resetField: ->
       @resetField()
