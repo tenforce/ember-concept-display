@@ -1,8 +1,8 @@
 `import Ember from 'ember'`
-`import layout from '../templates/components/concept-textarea'`
+`import layout from '../templates/components/concept-simple-textarea'`
 `import ResizeTextareaMixin from '../mixins/resize-textarea'`
 
-ConceptTextareaComponent = Ember.Component.extend ResizeTextareaMixin,
+ConceptSimpleTextareaComponent = Ember.Component.extend ResizeTextareaMixin,
   saveAllButton: Ember.inject.service()
   layout: layout
 
@@ -44,4 +44,7 @@ ConceptTextareaComponent = Ember.Component.extend ResizeTextareaMixin,
     resetField: ->
       @resetField()
 
-`export default ConceptTextareaComponent`
+  disableEditing: Ember.computed.alias 'object.disableEditing'
+  showActions: Ember.computed.not 'object.isUnderCreation'
+
+`export default ConceptSimpleTextareaComponent`
