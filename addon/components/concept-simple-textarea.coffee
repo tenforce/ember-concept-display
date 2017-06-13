@@ -45,6 +45,9 @@ ConceptSimpleTextareaComponent = Ember.Component.extend ResizeTextareaMixin,
       @resetField()
 
   disableEditing: Ember.computed.alias 'object.disableEditing'
-  showActions: Ember.computed.not 'object.isUnderCreation'
+  showActions: Ember.computed 'dirty', 'object.isUnderCreation', ->
+    if @get('object.isUnderCreation') then return false
+    if @get('dirty') then return true
+    return false
 
 `export default ConceptSimpleTextareaComponent`
