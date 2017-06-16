@@ -1,6 +1,6 @@
 {
   "name": "ember-concept-display",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Several components to easily declare how to display a concept.",
   "directories": {
     "doc": "doc",
