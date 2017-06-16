@@ -3,51 +3,62 @@
 `import ResizeTextareaMixin from '../mixins/resize-textarea'`
 
 ConceptSimpleTextareaComponent = Ember.Component.extend ResizeTextareaMixin,
+  classNameBindings: ['reference', 'valueSavedAndNotDirty:saved', 'valueSaveFailed:failed', 'dirty:dirty']
   saveAllButton: Ember.inject.service()
   layout: layout
 
-  reference: undefined
+  modelValue: undefined
+  newValue: Ember.computed.oneWay 'modelValue'
+  showActions: true
 
-  boundValue: undefined
+  referenceObserver: Ember.observer 'reference', ( ->
+    ref = @get('reference')
+    unless ref then return
+    Ember.defineProperty @, 'modelValue',
+      Ember.computed.alias "object.#{ref}"
+
+    propertySaved = "object.#{ref}Saved"
+    Ember.defineProperty @, 'valueSavedAndNotDirty',
+      Ember.computed "dirty", propertySaved, ->
+        if @get('dirty') then return false
+        return @get("#{propertySaved}")
+
+    propertyFailed = "object.#{ref}Failed"
+    Ember.defineProperty @, 'valueSaveFailed',
+      Ember.computed.alias propertyFailed
+
+    propertySaving = "object.#{ref}Saving"
+    Ember.defineProperty @, 'valueSaving',
+      Ember.computed.alias propertySaving
+  ).on('init')
 
   init: ->
     @_super()
-    ref = 'object.' + @get('reference')
-    value = @get(ref)
-    @set 'boundValue', value
     if not @get('object.disableEditing')
       @get('saveAllButton').subscribe(@)
-      Ember.defineProperty @, "dirty",
-        Ember.computed 'boundValue', ref, ->
-          # look at the values as "" if undefined
-          value = @get(ref) or ""
-          boundValue = @get('boundValue') or ""
-          boundValue != value
+
+  willDestroyElement: ->
+    @_super()
+    @get('saveAllButton').unsubscribe(@)
+
+  dirty: Ember.computed 'modelValue', 'newValue', ->
+    return @get('modelValue') != @get('newValue')
 
   saveAllClick: ->
-    @saveField()
+    @saveField(false)
 
   resetField: ->
-    ref = 'object.' + @get('reference')
-    value = @get(ref)
-    @set('boundValue', value)
+    @set('newValue', @get('modelValue'))
 
-  saveField: ->
-    boundValue = @get('boundValue')
-    @get('object').set(@get('reference'), boundValue)
+  saveField: (save) ->
+    @sendAction('saveValue', @get('newValue'), @get('modelValue'), save)
 
   actions:
     saveField: ->
-      @saveField()
-      @get('object').save()
+      @saveField(true)
 
     resetField: ->
       @resetField()
 
-  disableEditing: Ember.computed.alias 'object.disableEditing'
-  showActions: Ember.computed 'dirty', 'object.isUnderCreation', ->
-    if @get('object.isUnderCreation') then return false
-    if @get('dirty') then return true
-    return false
 
 `export default ConceptSimpleTextareaComponent`

@@ -1,15 +1,22 @@
 {{#if disableEditing}}
-  {{#if boundValue}}
-    <p class='no-edit'>{{boundValue}}</p>
+  {{#if newValue}}
+    <p class='no-edit'>{{newValue}}</p>
   {{else}}
     <p class="msg msg--empty">Nothing added for this concept.</p>
   {{/if}}
 {{else}}
-  {{textarea value=boundValue cols="80" placeholder="Enter text here"}}
+  {{textarea value=newValue cols="80" placeholder="Enter text here"}}
+
   {{#if showActions}}
-    <div class="actions">
-      <button type="button" class="save"   title="save field"  {{action 'saveField'}}  disabled={{not dirty}}></button>
-      <button type="button" class="cancel" title="reset field" {{action 'resetField'}} disabled={{not dirty}}></button>
-    </div>
+    {{#if valueSaving}}
+      <div class="actions">
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+      </div>
+    {{else if dirty}}
+      <div class="actions">
+        <button type="button" class="save"   title="Save field"  {{action 'saveField'}}  disabled={{not dirty}}></button>
+        <button type="button" class="cancel" title="Reset field" {{action 'resetField'}} disabled={{not dirty}}></button>
+      </div>
+    {{/if}}
   {{/if}}
 {{/if}}
