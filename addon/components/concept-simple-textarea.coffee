@@ -10,6 +10,8 @@ ConceptSimpleTextareaComponent = Ember.Component.extend ResizeTextareaMixin,
   modelValue: undefined
   newValue: Ember.computed.oneWay 'modelValue'
   showActions: true
+  # default value for disableEditing, can be overridden by consumer
+  disableEditing: Ember.computed.oneWay 'object.disableEditing'
 
   referenceObserver: Ember.observer 'reference', ( ->
     ref = @get('reference')
