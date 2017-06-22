@@ -26,6 +26,8 @@ ConceptTextareaComponent = Ember.Component.extend ResizeTextareaMixin,
 
   saveAllClick: ->
     @saveField()
+  resetAllClick: ->
+    @resetField(false)
 
   resetField: ->
     ref = 'object.' + @get('reference')

@@ -48,6 +48,8 @@ ConceptSimpleTextareaComponent = Ember.Component.extend ResizeTextareaMixin,
 
   saveAllClick: ->
     @saveField(false)
+  resetAllClick: ->
+    @resetField(false)
 
   resetField: ->
     @set('newValue', @get('modelValue'))
@@ -60,7 +62,7 @@ ConceptSimpleTextareaComponent = Ember.Component.extend ResizeTextareaMixin,
       @saveField(true)
 
     resetField: ->
-      @resetField()
+      @resetField(true)
 
 
 `export default ConceptSimpleTextareaComponent`
