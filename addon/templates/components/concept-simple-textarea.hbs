@@ -14,8 +14,8 @@
       </div>
     {{else if dirty}}
       <div class="actions">
-        <button type="button" class="save"   title="Save field"  {{action 'saveField'}}  disabled={{not dirty}}></button>
-        <button type="button" class="cancel" title="Reset field" {{action 'resetField'}} disabled={{not dirty}}></button>
+        <button type="button" class="save" tabindex="-1" title="Save field"  {{action 'saveField'}}  disabled={{not dirty}}></button>
+        <button type="button" class="cancel" tabindex="-1" title="Reset field" {{action 'resetField'}} disabled={{not dirty}}></button>
       </div>
     {{/if}}
   {{/if}}
