@@ -7,10 +7,12 @@ ConceptSectionComponent = Ember.Component.extend
 
   title: null
   collapsed: true
+  collapsable: true
 
   actions:
     toggleCollapsed: ->
-      @toggleProperty('collapsed')
+      if @get('collapsable')
+        @toggleProperty('collapsed')
 
 
 `export default ConceptSectionComponent`

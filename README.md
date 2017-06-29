@@ -20,7 +20,7 @@ All blocks can also be filled in with plain HTML or custom components.
 	Wrapper for the body sections.
 
 		* `concept-section title collapsed`  
-		A collapsible section with a title.
+		A collapsible section with a title. You can also disable collapsing by the flag `collapsable=false`. By default this is set to true.
 
 			* `concept-subsection title`  
 			A subsection with a title.
