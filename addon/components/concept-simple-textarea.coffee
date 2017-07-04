@@ -44,7 +44,8 @@ ConceptSimpleTextareaComponent = Ember.Component.extend ResizeTextareaMixin,
     @get('saveAllButton').unsubscribe(@)
 
   dirty: Ember.computed 'modelValue', 'newValue', ->
-    return @get('modelValue') != @get('newValue')
+    return (@get('modelValue') || "") != (@get('newValue') || "")
+
 
   saveAllClick: ->
     @saveField(false)
